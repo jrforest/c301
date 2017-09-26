@@ -14,7 +14,7 @@ public class Counter {
     private String comment;
 
 
-    public Counter(int initial, String name){
+    public Counter(String name, int initial){
         date = new Date();
         this.initial = initial;
         this.current = initial;
@@ -23,7 +23,7 @@ public class Counter {
 
     }
 
-    public Counter(int initial, String name, String comment){
+    public Counter(String name, int initial, String comment){
         date = new Date();
         this.initial = initial;
         this.current = initial;

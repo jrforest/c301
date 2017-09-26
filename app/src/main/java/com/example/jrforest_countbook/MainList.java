@@ -15,7 +15,15 @@ import java.util.ArrayList;
 
 public class MainList extends AppCompatActivity {
 
-    ArrayList<Counter> CounterList = new ArrayList<Counter>();
+    public static final String COUNTER_NAME = "Name";
+    public static final String COUNTER_INIT = "Initial";
+    public static final String COUNTER_COMMENT = "Comment";
+
+    static final int EDIT_COUNTER_REQUEST = 0;
+
+    ArrayList<Counter> counterList = new ArrayList<Counter>();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,24 @@ public class MainList extends AppCompatActivity {
     public void createCounter(View view){
 
         Intent intent = new Intent(this, EditCounter.class);
-        startActivity(intent);
+        startActivityForResult(intent, EDIT_COUNTER_REQUEST);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == EDIT_COUNTER_REQUEST && resultCode == RESULT_OK){
+            String name = data.getStringExtra(COUNTER_NAME);
+            int initial = data.getIntExtra(COUNTER_INIT, 0);
+            String comment = data.getStringExtra(COUNTER_COMMENT);
+
+            Counter counter = new Counter(name, initial, comment);
+
+            counterList.add(counter);
+        }
+
+
+
+    }
+
+
 }

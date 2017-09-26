@@ -5,4 +5,5 @@
     <string name="empty_name">Enter counter name</string>
     <string name="empty_count">Enter initial value</string>
     <string name="done">DONE</string>
+    <string name="empty_comm">Add a comment</string>
 </resources>
