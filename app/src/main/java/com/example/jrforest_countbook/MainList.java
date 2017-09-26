@@ -26,7 +26,7 @@ public class MainList extends AppCompatActivity {
     private ListView counterView;
 
     private ArrayList<Counter> counters = new ArrayList<Counter>();
-    private ArrayAdapter<Counter> adapter;
+    private CounterAdapter adapter;
 
 
 
@@ -39,6 +39,11 @@ public class MainList extends AppCompatActivity {
 
 
         counterView = (ListView) findViewById(R.id.counterView);
+        adapter = new CounterAdapter(this, R.layout.counter_item, counters);
+        counterView.setAdapter(adapter);
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,10 +57,6 @@ public class MainList extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        adapter = new ArrayAdapter<Counter>(this, R.layout.counter_item, counters);
-
-        counterView.setAdapter(adapter);
-
 
     }
 
