@@ -6,4 +6,6 @@
     <string name="empty_count">Enter initial value</string>
     <string name="done">DONE</string>
     <string name="empty_comm">Add a comment</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
 </resources>

@@ -10,6 +10,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -21,7 +23,10 @@ public class MainList extends AppCompatActivity {
 
     static final int EDIT_COUNTER_REQUEST = 0;
 
-    ArrayList<Counter> counterList = new ArrayList<Counter>();
+    private ListView counterView;
+
+    private ArrayList<Counter> counters = new ArrayList<Counter>();
+    private ArrayAdapter<Counter> adapter;
 
 
 
@@ -32,6 +37,9 @@ public class MainList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+        counterView = (ListView) findViewById(R.id.counterView);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,6 +48,17 @@ public class MainList extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        adapter = new ArrayAdapter<Counter>(this, R.layout.counter_item, counters);
+
+        counterView.setAdapter(adapter);
+
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,9 +95,10 @@ public class MainList extends AppCompatActivity {
             int initial = data.getIntExtra(COUNTER_INIT, 0);
             String comment = data.getStringExtra(COUNTER_COMMENT);
 
-            Counter counter = new Counter(name, initial, comment);
+            counters.add(new Counter(name, initial, comment));
 
-            counterList.add(counter);
+            adapter.notifyDataSetChanged();
+
         }
 
 
