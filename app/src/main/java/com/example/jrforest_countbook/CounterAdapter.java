@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -43,12 +44,8 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                 v = inflater.inflate(R.layout.counter_item, null);
             }
 
-            else {
 
-            }
-
-
-            Counter c = cList.get(position);
+            final Counter c = cList.get(position);
 
             if (c != null) {
                 TextView counter_name = (TextView) v.findViewById(R.id.counterName);
@@ -62,11 +59,34 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                     counter_value.setText(String.valueOf(c.getCurrent()));
                 }
 
+                Button incButton = (Button) v.findViewById(R.id.counterInc);
+                Button decButton = (Button) v.findViewById(R.id.counterDec);
+
+                incButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        c.increment();
+                    }
+                });
+
+                decButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        c.decrement();
+                    }
+                });
+
+
+
+
+
+
             }
 
 
 
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
 
         }
         return v;
