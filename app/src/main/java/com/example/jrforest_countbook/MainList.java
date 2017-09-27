@@ -80,6 +80,11 @@ public class MainList extends AppCompatActivity {
             return true;
         }
 
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -101,7 +106,6 @@ public class MainList extends AppCompatActivity {
             adapter.notifyDataSetChanged();
 
         }
-
 
 
     }
