@@ -18,11 +18,27 @@ public class EditCounter extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_counter);
+
+        this.name = (TextView) findViewById(R.id.counterName);
+        this.initial = (TextView) findViewById(R.id.counterInitial);
+        this.comment = (TextView) findViewById(R.id.counterComment);
+
+
         Button button = (Button) findViewById(R.id.counterEditDone);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                endEditCounter();
+                if (name.getText().toString().isEmpty()){
+                    name.setError("Counter name required");
+                }
+
+                else if (initial.getText().toString().isEmpty()){
+                    initial.setError("Counter value required");
+                }
+
+                else {
+                    endEditCounter();
+                }
             }
             });
         }
@@ -30,9 +46,6 @@ public class EditCounter extends AppCompatActivity {
 
     public void endEditCounter(){
         try{
-            this.name = (TextView) findViewById(R.id.counterName);
-            this.initial = (TextView) findViewById(R.id.counterInitial);
-            this.comment = (TextView) findViewById(R.id.counterComment);
 
             String nameText = name.getText().toString();
             int initialInt = Integer.parseInt(initial.getText().toString());
