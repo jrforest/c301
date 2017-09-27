@@ -61,6 +61,13 @@ public class MainList extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+        adapter.notifyDataSetChanged();
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
