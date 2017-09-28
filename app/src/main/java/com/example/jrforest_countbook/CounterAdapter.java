@@ -66,6 +66,7 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                     @Override
                     public void onClick(View v) {
                         c.increment();
+                        notifyDataSetChanged();
                     }
                 });
 
@@ -73,6 +74,7 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                     @Override
                     public void onClick(View v) {
                         c.decrement();
+                        notifyDataSetChanged();
                     }
                 });
 

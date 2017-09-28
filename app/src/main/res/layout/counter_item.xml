@@ -32,20 +32,21 @@
         android:inputType="none" />
 
     <Button
-        android:id="@+id/counterInc"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/plus"
-        android:focusable="false"/>
-
-    <Button
         android:id="@+id/counterDec"
         style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginTop="8dp"
-        android:text="@string/minus"
-        android:focusable="false" />
+        android:focusable="false"
+        android:text="@string/minus" />
+
+    <Button
+        android:id="@+id/counterInc"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:focusable="false"
+        android:text="@string/plus" />
+
 </LinearLayout>

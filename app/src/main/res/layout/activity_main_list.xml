@@ -34,6 +34,7 @@
     <ListView
         android:id="@+id/counterView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="449dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </android.support.design.widget.CoordinatorLayout>

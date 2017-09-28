@@ -1,6 +1,10 @@
 package com.example.jrforest_countbook;
 
 import com.example.jrforest_countbook.Counter;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +16,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.lang.reflect.Type;
+
+
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.Date;
 
 import java.util.ArrayList;
@@ -21,6 +37,8 @@ public class MainList extends AppCompatActivity {
     public static final String COUNTER_NAME = "Name";
     public static final String COUNTER_INIT = "Initial";
     public static final String COUNTER_COMMENT = "Comment";
+
+    private static final String FILENAME = "jrforestCountBook.sav";
 
     static final int EDIT_COUNTER_REQUEST = 0;
 
@@ -37,14 +55,7 @@ public class MainList extends AppCompatActivity {
         setContentView(R.layout.activity_main_list);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-
         counterView = (ListView) findViewById(R.id.counterView);
-        adapter = new CounterAdapter(this, R.layout.counter_item, counters);
-        counterView.setAdapter(adapter);
-
-
-
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +70,13 @@ public class MainList extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
+        loadFromFile();
+        adapter = new CounterAdapter(this, R.layout.counter_item, counters);
+        counterView.setAdapter(adapter);
+
     }
+
+
 
     @Override
     protected void onResume(){
@@ -96,12 +113,6 @@ public class MainList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void createCounter(View view){
-
-        Intent intent = new Intent(this, EditCounter.class);
-        startActivityForResult(intent, EDIT_COUNTER_REQUEST);
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == EDIT_COUNTER_REQUEST && resultCode == RESULT_OK){
@@ -113,10 +124,60 @@ public class MainList extends AppCompatActivity {
 
             adapter.notifyDataSetChanged();
 
+            saveInFile();
+
         }
 
 
     }
+
+    public void createCounter(View view){
+
+        Intent intent = new Intent(this, EditCounter.class);
+        startActivityForResult(intent, EDIT_COUNTER_REQUEST);
+    }
+
+    private void saveInFile() {
+        try {
+            FileOutputStream fos = openFileOutput(FILENAME,
+                    Context.MODE_PRIVATE);
+            OutputStreamWriter writer = new OutputStreamWriter(fos);
+            Gson gson = new Gson();
+            gson.toJson(counters, writer);
+            writer.flush();
+
+            fos.close();
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException();
+        }
+    }
+
+
+
+    private void loadFromFile() {
+        try {
+            FileInputStream fis = openFileInput(FILENAME);
+            BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+            Gson gson = new Gson();
+
+            Type listType = new TypeToken<ArrayList<Counter>>() {}.getType();
+            counters = gson.fromJson(in, listType);
+
+
+        } catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            counters = new ArrayList<Counter>();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 
 }
