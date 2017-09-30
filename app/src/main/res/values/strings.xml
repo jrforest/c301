@@ -11,4 +11,5 @@
     <string name="current">Current</string>
     <string name="initial">Initial</string>
     <string name="comment">Comment</string>
+    <string name="reset">RESET</string>
 </resources>

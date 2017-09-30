@@ -20,7 +20,8 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_main_list" />
+    <include layout="@layout/content_main_list"
+        android:id="@+id/include" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
@@ -37,5 +38,14 @@
         android:layout_height="449dp"
         android:clickable ="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <TextView
+        android:id="@+id/totalCounters"
+        android:layout_width="157dp"
+        android:layout_height="39dp"
+        android:layout_gravity="top|right"
+        android:textSize="24sp"
+        app:layout_anchor="@+id/include"
+        app:layout_anchorGravity="bottom|left" />
 
 </android.support.design.widget.CoordinatorLayout>

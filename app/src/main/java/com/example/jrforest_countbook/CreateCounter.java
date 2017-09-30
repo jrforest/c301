@@ -39,14 +39,14 @@ public class CreateCounter extends AppCompatActivity {
                 }
 
                 else {
-                    endEditCounter();
+                    endCreateCounter();
                 }
             }
             });
         }
 
 
-    public void endEditCounter(){
+    public void endCreateCounter(){
         try{
 
             String nameText = name.getText().toString();

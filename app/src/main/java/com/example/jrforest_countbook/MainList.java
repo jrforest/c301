@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -42,12 +43,15 @@ public class MainList extends AppCompatActivity {
     public static final String COUNTER_CURRENT = "Current";
     public static final String COUNTER_COMMENT = "Comment";
     public static final String COUNTER_DATE = "Date";
+    public static final String COUNTER_POSITION = "Position";
+
 
     private static final String FILENAME = "jrforestCountBook.sav";
 
     static final int CREATE_COUNTER_REQUEST = 0;
     static final int EDIT_COUNTER_REQUEST = 1;
 
+    private TextView totalCount;
     private ListView counterView;
 
     private ArrayList<Counter> counters = new ArrayList<Counter>();
@@ -62,6 +66,7 @@ public class MainList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         counterView = (ListView) findViewById(R.id.counterView);
+        totalCount = (TextView) findViewById(R.id.totalCounters);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,6 +103,7 @@ public class MainList extends AppCompatActivity {
     protected void onResume(){
         super.onResume();
         adapter.notifyDataSetChanged();
+        updateCount();
         saveInFile();
 
     }
@@ -153,7 +159,27 @@ public class MainList extends AppCompatActivity {
             counters.add(new Counter(name, initial, comment));
 
             adapter.notifyDataSetChanged();
+            updateCount();
 
+            saveInFile();
+
+        }
+
+        else if (requestCode == EDIT_COUNTER_REQUEST && resultCode == RESULT_OK){
+            String name = data.getStringExtra(COUNTER_NAME);
+            int initial = data.getIntExtra(COUNTER_INIT, 0);
+            String comment = data.getStringExtra(COUNTER_COMMENT);
+            int current = data.getIntExtra(COUNTER_CURRENT, 0);
+            int position = data.getIntExtra(COUNTER_POSITION, 0);
+
+            counters.get(position).setName(name);
+            counters.get(position).setInital(initial);
+            counters.get(position).setComment(comment);
+            counters.get(position).setCurrent(current);
+            counters.get(position).updateDate();
+
+            adapter.notifyDataSetChanged();
+            updateCount();
             saveInFile();
 
         }
@@ -177,10 +203,15 @@ public class MainList extends AppCompatActivity {
         intent.putExtra(COUNTER_CURRENT, counters.get(position).getCurrent());
         intent.putExtra(COUNTER_COMMENT, counters.get(position).getComment());
         intent.putExtra(COUNTER_DATE, counters.get(position).getDate().toString());
+        intent.putExtra(COUNTER_POSITION, position);
 
 
         startActivityForResult(intent, EDIT_COUNTER_REQUEST);
 
+    }
+
+    public void updateCount(){
+        totalCount.setText(counters.size() + " counters");
     }
 
 

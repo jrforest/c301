@@ -1,5 +1,6 @@
 package com.example.jrforest_countbook;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -43,8 +44,6 @@ public class EditCounter extends AppCompatActivity {
         oldDate = getIntent().getStringExtra(MainList.COUNTER_DATE);
 
 
-
-
         name.setText(oldName);
         initial.setText(String.valueOf(oldInitial));
         comment.setText(oldComment);
@@ -52,22 +51,68 @@ public class EditCounter extends AppCompatActivity {
         date.setText(oldDate);
 
 
-
-
         Button doneButton = (Button) findViewById(R.id.editCounterDone);
+        Button resetButton = (Button) findViewById(R.id.editCounterReset);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                endEditCounter();
             }
         });
 
+        resetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int initialint = Integer.parseInt(initial.getText().toString());
+                current.setText(String.valueOf(initialint));
+
+            }
+
+        });
+
+    }
 
 
 
 
+
+    public void endEditCounter(){
+        try{
+
+            String nameText = name.getText().toString();
+            int initialInt = Integer.parseInt(initial.getText().toString());
+            int currentInt = Integer.parseInt(current.getText().toString());
+            String commentText = comment.getText().toString();
+
+
+            Intent intent = new Intent();
+
+            intent.putExtra(MainList.COUNTER_NAME, nameText);
+            intent.putExtra(MainList.COUNTER_INIT, initialInt);
+            intent.putExtra(MainList.COUNTER_COMMENT, commentText);
+            intent.putExtra(MainList.COUNTER_CURRENT, currentInt);
+            intent.putExtra(MainList.COUNTER_POSITION, getIntent().getIntExtra(MainList.COUNTER_POSITION, 0));
+
+            setResult(RESULT_OK, intent);
+
+            finish();
+
+        }
+
+        catch(Exception e){
+            e.printStackTrace();
+        }
 
 
     }
+
+
+
+
+
+
+
+
+
 }
