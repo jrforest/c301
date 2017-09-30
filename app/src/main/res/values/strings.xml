@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">jrforest-CountBook</string>
+    <string name="action_settings">Settings</string>
+    <string name="empty_text">Add a counter!</string>
+    <string name="empty_name">Enter counter name</string>
+    <string name="empty_count">Enter initial value</string>
+    <string name="done">DONE</string>
+    <string name="empty_comm">Add a comment</string>
+    <string name="plus">+</string>
+    <string name="minus">-</string>
+    <string name="current">Current</string>
+    <string name="initial">Initial</string>
+    <string name="comment">Comment</string>
+    <string name="reset">RESET</string>
+    <string name="delete">DELETE</string>
+</resources>
