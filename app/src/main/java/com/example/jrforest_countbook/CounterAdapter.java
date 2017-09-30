@@ -67,7 +67,6 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
 
                 Button incButton = (Button) v.findViewById(R.id.counterInc);
                 Button decButton = (Button) v.findViewById(R.id.counterDec);
-                ImageButton delButton = (ImageButton) v.findViewById(R.id.counterDel);
 
                 incButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -81,14 +80,6 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                     @Override
                     public void onClick(View v) {
                         c.decrement();
-                        notifyDataSetChanged();
-                    }
-                });
-
-                delButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        remove(c);
                         notifyDataSetChanged();
                     }
                 });

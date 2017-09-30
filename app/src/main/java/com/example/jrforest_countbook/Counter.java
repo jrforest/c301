@@ -19,7 +19,7 @@ public class Counter {
         this.initial = initial;
         this.current = initial;
         this.name = name;
-        this.comment = new String();
+        this.comment = "";
 
 
     }

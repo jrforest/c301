@@ -12,4 +12,5 @@
     <string name="initial">Initial</string>
     <string name="comment">Comment</string>
     <string name="reset">RESET</string>
+    <string name="delete">DELETE</string>
 </resources>

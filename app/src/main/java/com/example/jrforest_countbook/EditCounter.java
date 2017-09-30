@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Date;
 
 public class EditCounter extends AppCompatActivity {
 
@@ -53,6 +52,7 @@ public class EditCounter extends AppCompatActivity {
 
         Button doneButton = (Button) findViewById(R.id.editCounterDone);
         Button resetButton = (Button) findViewById(R.id.editCounterReset);
+        Button deleteButton = (Button) findViewById(R.id.editCounterDelete);
 
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +70,15 @@ public class EditCounter extends AppCompatActivity {
             }
 
         });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteCounter();
+            }
+        });
+
+
 
     }
 
@@ -104,12 +113,23 @@ public class EditCounter extends AppCompatActivity {
             e.printStackTrace();
         }
 
-
     }
 
+    public void deleteCounter(){
 
+        try {
+            Intent intent = new Intent();
 
+            intent.putExtra(MainList.COUNTER_POSITION, getIntent().getIntExtra(MainList.COUNTER_POSITION, 0));
 
+            setResult(RESULT_CANCELED, intent);
+
+            finish();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 
 
 

@@ -1,23 +1,18 @@
 package com.example.jrforest_countbook;
 
-import com.example.jrforest_countbook.Counter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,7 +27,6 @@ import java.lang.reflect.Type;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.util.Date;
 
 import java.util.ArrayList;
 
@@ -78,7 +72,7 @@ public class MainList extends AppCompatActivity {
 
         counterView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                editCounter(v, position);
+                editCounter(position);
             }
         });
 
@@ -184,6 +178,15 @@ public class MainList extends AppCompatActivity {
 
         }
 
+        else if (requestCode == EDIT_COUNTER_REQUEST && resultCode == RESULT_CANCELED){
+            int position = data.getIntExtra(COUNTER_POSITION, 0);
+            counters.remove(position);
+            adapter.notifyDataSetChanged();
+            updateCount();
+            saveInFile();
+
+        }
+
 
     }
 
@@ -194,7 +197,7 @@ public class MainList extends AppCompatActivity {
         startActivityForResult(intent, CREATE_COUNTER_REQUEST);
     }
 
-    public void editCounter(View view, int position){
+    public void editCounter(int position){
         saveInFile();
         Intent intent = new Intent(this, EditCounter.class);
 
@@ -211,7 +214,8 @@ public class MainList extends AppCompatActivity {
     }
 
     public void updateCount(){
-        totalCount.setText(counters.size() + " counters");
+        String countNumber = String.valueOf(counters.size()) + " counters";
+        totalCount.setText(countNumber);
     }
 
 
