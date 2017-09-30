@@ -56,6 +56,7 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
             if (c != null) {
                 TextView counter_name = (TextView) v.findViewById(R.id.counterName);
                 TextView counter_value = (TextView) v.findViewById(R.id.counterValue);
+                TextView counter_date = (TextView) v.findViewById(R.id.counterDate);
 
                 if (counter_name != null){
                     counter_name.setText(c.getName());
@@ -63,6 +64,10 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
 
                 if (counter_value != null){
                     counter_value.setText(String.valueOf(c.getCurrent()));
+                }
+
+                if (counter_date != null){
+                    counter_date.setText(c.getDate().toString());
                 }
 
                 Button incButton = (Button) v.findViewById(R.id.counterInc);

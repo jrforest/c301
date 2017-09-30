@@ -8,11 +8,15 @@
     android:focusable="false" >
 
     <TextView
+        android:id="@+id/counterDate"
+        android:layout_width="127dp"
+        android:layout_height="48dp" />
+
+    <TextView
         android:id="@+id/counterName"
-        android:layout_width="wrap_content"
+        android:layout_width="161dp"
         android:layout_height="43dp"
         android:layout_marginTop="8dp"
-        android:layout_weight="1"
         android:clickable="false"
         android:ems="10"
         android:focusable="false"
@@ -33,7 +37,7 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:inputType="none"
-        android:textAlignment="center"
+        android:textAlignment="textStart"
         android:textIsSelectable="false"
         android:textSize="18sp" />
 
