@@ -19,14 +19,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EditCounter"
-            android:parentActivityName=".MainList" >
+        <activity
+            android:name=".CreateCounter"
+            android:parentActivityName=".MainList">
 
             <!-- The meta-data tag is required if you support API level 15 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainList" />
         </activity>
+        <activity android:name=".EditCounter"></activity>
     </application>
 
 </manifest>

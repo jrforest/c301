@@ -8,4 +8,7 @@
     <string name="empty_comm">Add a comment</string>
     <string name="plus">+</string>
     <string name="minus">-</string>
+    <string name="current">Current</string>
+    <string name="initial">Initial</string>
+    <string name="comment">Comment</string>
 </resources>

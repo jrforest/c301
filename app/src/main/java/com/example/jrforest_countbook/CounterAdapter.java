@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,6 +36,11 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
 
     }
 
+   /* public int getPosition(){
+        return po
+    }
+    */
+
 
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
@@ -61,6 +67,7 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
 
                 Button incButton = (Button) v.findViewById(R.id.counterInc);
                 Button decButton = (Button) v.findViewById(R.id.counterDec);
+                ImageButton delButton = (ImageButton) v.findViewById(R.id.counterDel);
 
                 incButton.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -74,6 +81,14 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                     @Override
                     public void onClick(View v) {
                         c.decrement();
+                        notifyDataSetChanged();
+                    }
+                });
+
+                delButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        remove(c);
                         notifyDataSetChanged();
                     }
                 });

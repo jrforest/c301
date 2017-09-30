@@ -19,6 +19,7 @@ public class Counter {
         this.initial = initial;
         this.current = initial;
         this.name = name;
+        this.comment = new String();
 
 
     }
@@ -70,5 +71,13 @@ public class Counter {
     public void decrement() {current--;}
 
     public void reset() {current = initial;}
+
+    public void updateDate(){
+        date = new Date();
+    }
+
+    public Date getDate(){
+        return date;
+    }
 
 }
