@@ -1,5 +1,6 @@
 package com.example.jrforest_countbook;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -42,7 +43,7 @@ public class Counter {
         return current;
     }
 
-    public void setInital(int initial){
+    public void setInitial(int initial){
         this.initial = initial;
     }
 
@@ -76,8 +77,10 @@ public class Counter {
         date = new Date();
     }
 
-    public Date getDate(){
-        return date;
+    public String getDate(){
+        String simpleDate = new SimpleDateFormat("yyyy-MM-dd").format(date);
+        return simpleDate;
     }
+
 
 }

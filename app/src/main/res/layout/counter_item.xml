@@ -10,7 +10,8 @@
     <TextView
         android:id="@+id/counterDate"
         android:layout_width="127dp"
-        android:layout_height="48dp" />
+        android:layout_height="48dp"
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/counterName"

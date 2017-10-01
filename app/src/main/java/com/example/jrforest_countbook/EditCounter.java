@@ -10,25 +10,25 @@ import android.widget.TextView;
 
 public class EditCounter extends AppCompatActivity {
 
-    TextView date;
-    TextView name;
-    TextView initial;
-    TextView current;
-    TextView comment;
-
-    String oldName;
-    String oldComment;
-    String oldDate;
-    int oldInitial;
-    int oldCurrent;
-
-
+    private TextView date;
+    private TextView name;
+    private TextView initial;
+    private TextView current;
+    private TextView comment;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_counter);
+
+        String oldName;
+        String oldComment;
+        String oldDate;
+        int oldInitial;
+        int oldCurrent;
+
+
 
         this.name = (TextView) findViewById(R.id.editCounterName);
         this.initial = (TextView) findViewById(R.id.editCounterInitial);
@@ -64,9 +64,7 @@ public class EditCounter extends AppCompatActivity {
         resetButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int initialint = Integer.parseInt(initial.getText().toString());
-                current.setText(String.valueOf(initialint));
-
+                resetCounter();
             }
 
         });
@@ -112,6 +110,12 @@ public class EditCounter extends AppCompatActivity {
         catch(Exception e){
             e.printStackTrace();
         }
+
+    }
+
+    public void resetCounter(){
+        int initialInt = Integer.parseInt(initial.getText().toString());
+        current.setText(String.valueOf(initialInt));
 
     }
 

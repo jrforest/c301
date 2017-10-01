@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,14 +16,14 @@ import java.util.ArrayList;
  */
 
 public class CounterAdapter extends ArrayAdapter<Counter>{
-    private ArrayList<Counter> cList;
+    private ArrayList<Counter> counterList;
     private static LayoutInflater inflater = null;
 
     public CounterAdapter (Activity activity, int textViewResourceId, ArrayList<Counter> cList){
         super(activity, textViewResourceId, cList);
 
         try{
-            this.cList = cList;
+            this.counterList = cList;
 
             inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         }
@@ -36,47 +35,42 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
 
     }
 
-   /* public int getPosition(){
-        return po
-    }
-    */
-
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        View v = convertView;
+        View view = convertView;
 
         try {
             if (convertView == null) {
-                v = inflater.inflate(R.layout.counter_item, null);
+                view = inflater.inflate(R.layout.counter_item, null);
             }
 
 
-            final Counter c = cList.get(position);
+            final Counter counter = counterList.get(position);
 
-            if (c != null) {
-                TextView counter_name = (TextView) v.findViewById(R.id.counterName);
-                TextView counter_value = (TextView) v.findViewById(R.id.counterValue);
-                TextView counter_date = (TextView) v.findViewById(R.id.counterDate);
+            if (counter != null) {
+                TextView counter_name = (TextView) view.findViewById(R.id.counterName);
+                TextView counter_value = (TextView) view.findViewById(R.id.counterValue);
+                TextView counter_date = (TextView) view.findViewById(R.id.counterDate);
 
                 if (counter_name != null){
-                    counter_name.setText(c.getName());
+                    counter_name.setText(counter.getName());
                 }
 
                 if (counter_value != null){
-                    counter_value.setText(String.valueOf(c.getCurrent()));
+                    counter_value.setText(String.valueOf(counter.getCurrent()));
                 }
 
                 if (counter_date != null){
-                    counter_date.setText(c.getDate().toString());
+                    counter_date.setText(counter.getDate());
                 }
 
-                Button incButton = (Button) v.findViewById(R.id.counterInc);
-                Button decButton = (Button) v.findViewById(R.id.counterDec);
+                Button incButton = (Button) view.findViewById(R.id.counterInc);
+                Button decButton = (Button) view.findViewById(R.id.counterDec);
 
                 incButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        c.increment();
+                        counter.increment();
                         notifyDataSetChanged();
                     }
                 });
@@ -84,7 +78,7 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
                 decButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        c.decrement();
+                        counter.decrement();
                         notifyDataSetChanged();
                     }
                 });
@@ -102,7 +96,7 @@ public class CounterAdapter extends ArrayAdapter<Counter>{
         catch (Exception e) {
 
         }
-        return v;
+        return view;
     }
 }
 

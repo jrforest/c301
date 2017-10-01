@@ -42,8 +42,8 @@ public class MainList extends AppCompatActivity {
 
     private static final String FILENAME = "jrforestCountBook.sav";
 
-    static final int CREATE_COUNTER_REQUEST = 0;
-    static final int EDIT_COUNTER_REQUEST = 1;
+    private static final int CREATE_COUNTER_REQUEST = 0;
+    private static final int EDIT_COUNTER_REQUEST = 1;
 
     private TextView totalCount;
     private ListView counterView;
@@ -167,7 +167,7 @@ public class MainList extends AppCompatActivity {
             int position = data.getIntExtra(COUNTER_POSITION, 0);
 
             counters.get(position).setName(name);
-            counters.get(position).setInital(initial);
+            counters.get(position).setInitial(initial);
             counters.get(position).setComment(comment);
             counters.get(position).setCurrent(current);
             counters.get(position).updateDate();
@@ -198,14 +198,14 @@ public class MainList extends AppCompatActivity {
     }
 
     public void editCounter(int position){
-        saveInFile();
         Intent intent = new Intent(this, EditCounter.class);
+        saveInFile();
 
         intent.putExtra(COUNTER_NAME, counters.get(position).getName());
         intent.putExtra(COUNTER_INIT, counters.get(position).getInitial());
         intent.putExtra(COUNTER_CURRENT, counters.get(position).getCurrent());
         intent.putExtra(COUNTER_COMMENT, counters.get(position).getComment());
-        intent.putExtra(COUNTER_DATE, counters.get(position).getDate().toString());
+        intent.putExtra(COUNTER_DATE, counters.get(position).getDate());
         intent.putExtra(COUNTER_POSITION, position);
 
 

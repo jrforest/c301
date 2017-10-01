@@ -46,7 +46,7 @@ public class CreateCounter extends AppCompatActivity {
         }
 
 
-    public void endCreateCounter(){
+    protected void endCreateCounter(){
         try{
 
             String nameText = name.getText().toString();
