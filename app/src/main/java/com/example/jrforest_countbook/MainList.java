@@ -65,7 +65,7 @@ public class MainList extends AppCompatActivity {
     private ListView counterView;
 
     // counters keeps track of all the Counters for the app
-    private ArrayList<Counter> counters = new ArrayList<Counter>();
+    private ArrayList<Counter> counters;
 
     // adapter displays counters in counterView
     private CounterAdapter adapter;
@@ -109,11 +109,12 @@ public class MainList extends AppCompatActivity {
 
     }
 
-    // When the main activity starts up it loads past counters from an external file and sets the adapter
+    // When the main activity starts up it loads past counters from an external file into counters and sets the adapter
     @Override
     protected void onStart(){
         super.onStart();
 
+        counters = new ArrayList<Counter>();
         loadFromFile();
         adapter = new CounterAdapter(this, R.layout.counter_item, counters);
         counterView.setAdapter(adapter);
@@ -285,8 +286,16 @@ public class MainList extends AppCompatActivity {
 
     // update the view showing the total number of counters
     public void updateCount(){
-        // Get total number of counters in a string
-        String countNumber = String.valueOf(counters.size()) + " counters";
+        String countNumber = "";
+
+        if (counters != null) {
+            // Get total number of counters in a string
+            countNumber = String.valueOf(counters.size()) + " counters";
+        }
+
+        else {
+            countNumber = "0 counters";
+        }
         // Set the String to totalCount
         totalCount.setText(countNumber);
     }
